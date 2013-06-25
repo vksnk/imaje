@@ -64,7 +64,7 @@
 			sampler (create-sampler image)
 			]
 		(doseq [y (range hg) x (range wd)]
-			(aset ^ints new-pixels (+ x (* wd y)) (fun sampler x y))
+			(aset ^ints new-pixels (+ x (* wd y)) ^int (fun sampler x y))
 		)
 		(set-pixels! image new-pixels)
 	)
@@ -88,7 +88,6 @@
 	(let [img (empty-image 640 480)]
 		(immap img #(+ (%1 %2 %3) 12))
 		(println (pixel-reduce #(update-in %1 [%2] inc) (vec (repeat 256 0)) (get-pixels img)))
-		(println ((create-sampler img) 0 0))
 		(save-image img "out.png")
 	)
 )
