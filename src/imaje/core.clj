@@ -58,7 +58,7 @@
 
 (defn immap
 	""
-	[image fun]
+	[fun image]
 	(let [wd (width image)
 			hg (height image)
 			old-pixels (get-pixels image)
@@ -72,6 +72,26 @@
 		(set-pixels! image new-pixels)
 	)
 )
+
+(defn imreduce
+	""
+	[fun initial image]
+	(let [wd (width image)
+			hg (height image)
+			old-pixels (get-pixels image)
+			sampler (create-sampler image)
+			]
+		(loop [x 0 y 0 accum initial]
+			(cond
+				(= x wd) (recur 0 (inc y) accum)
+				(= y hg) accum
+				:else
+					(do
+						(recur (inc x) y (fun accum sampler x y)))
+				)
+			)
+		)
+	)		
 
 (defn pixel-map
 	""
@@ -89,8 +109,9 @@
 	[]
 	(println "Starting test application")
 	(let [img (empty-image 640 480)]
-		(time (immap img #(+ (%1 %2 %3) 12)))
-		(println (pixel-reduce #(update-in %1 [%2] inc) (vec (repeat 256 0)) (get-pixels img)))
+		(time (immap #(+ (%1 %2 %3) 12) img))
+		(time (imreduce #(update-in %1 [(%2 %3 %4)] inc) (vec (repeat 256 0)) img))
+		(println (imreduce #(update-in %1 [(%2 %3 %4)] inc) (vec (repeat 256 0)) img))
 		(save-image img "out.png")
 	)
 )
