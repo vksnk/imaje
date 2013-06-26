@@ -58,6 +58,22 @@
 	)
 )
 
+(defn imrender
+	""
+	[fun rwidth rheight]
+	(let [result (empty-image rwidth rheight)
+			new-pixels (get-pixels result)
+			]
+		(dotimes [y rheight]
+			(dotimes [x rwidth]
+				(aset ^ints new-pixels (+ x (* rwidth y)) ^int (fun x y)))
+		)
+		(set-pixels! result new-pixels)
+		result
+	)
+
+	)
+
 (defn immap
 	""
 	[fun image]
@@ -111,12 +127,10 @@
 (defn -main
 	[]
 	(println "Starting test application")
-	(let [img0 (empty-image 640 480)
-			img1 (immap #(+ (%3 %1 %2) 12) img0)
-			]
-		; (time (immap #(+ (%1 %2 %3) 12) img))
-		(time (imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img1))
-		(println (imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img1))
-		(save-image img1 "out.png")
+	(let [img (imrender (fn [_ _] 12) 640 480)]
+		(time (immap #(+ (%3 %1 %2) 12) img))
+		(time (imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img))
+		(println (imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img))
+		(save-image img "out.png")
 	)
 )
