@@ -52,7 +52,7 @@
 	(let [pixels (get-pixels image)
 			wd (width image)
 			hg (height image)]
-		(fn [x y] (aget ^ints pixels (+ hg (* y wd))))
+		(fn [x y] (aget ^ints pixels (+ x (* y wd))))
 	)
 )
 
