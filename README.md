@@ -4,7 +4,9 @@ A Clojure library designed to ... well, that part is up to you.
 
 ## Usage
 
-FIXME
+Image histogram using reduce function:
+
+(imreduce #(update-in %1 [(%2 %3 %4)] inc) (vec (repeat 256 0)) img1)
 
 ## License
 
