@@ -4,6 +4,8 @@
 	(import javax.imageio.ImageIO)
 	)
 
+; (set! *warn-on-reflection* true)
+
 (defn empty-image
 	""
 	[width height]
@@ -60,11 +62,12 @@
 	(let [wd (width image)
 			hg (height image)
 			old-pixels (get-pixels image)
-			new-pixels (aclone old-pixels)
+			new-pixels (aclone ^ints old-pixels)
 			sampler (create-sampler image)
 			]
-		(doseq [y (range hg) x (range wd)]
-			(aset ^ints new-pixels (+ x (* wd y)) ^int (fun sampler x y))
+		(dotimes [y hg]
+			(dotimes [x wd]
+				(aset ^ints new-pixels (+ x (* wd y)) ^int (fun sampler x y)))
 		)
 		(set-pixels! image new-pixels)
 	)
@@ -86,7 +89,7 @@
 	[]
 	(println "Starting test application")
 	(let [img (empty-image 640 480)]
-		(immap img #(+ (%1 %2 %3) 12))
+		(time (immap img #(+ (%1 %2 %3) 12)))
 		(println (pixel-reduce #(update-in %1 [%2] inc) (vec (repeat 256 0)) (get-pixels img)))
 		(save-image img "out.png")
 	)
