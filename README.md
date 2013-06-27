@@ -1,6 +1,6 @@
 # imaje
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library designed to do image processing in functional style.
 
 ## Usage
 
@@ -26,6 +26,6 @@ Image histogram using reduce function:
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Volodymyr Kysenko
 
 Distributed under the Eclipse Public License, the same as Clojure.
