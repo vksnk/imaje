@@ -32,7 +32,7 @@
 
 (defn immap
 	""
-	[fun image]
+	([fun image]
 	(let [wd (width image)
 			hg (height image)
 			result (empty-image image)
@@ -45,7 +45,23 @@
 		)
 		(set-pixels! result new-pixels)
 		result
-	)
+	))
+	([fun image1 image2]
+	(let [wd (width image1)
+			hg (height image1)
+			result (empty-image image1)
+			new-pixels (get-pixels result)
+			sampler1 (create-sampler image1)
+			sampler2 (create-sampler image2)
+			]
+		(dotimes [y hg]
+			(dotimes [x wd]
+				(aset ^ints new-pixels (+ x (* wd y)) ^int (fun x y sampler1 sampler2)))
+		)
+		(set-pixels! result new-pixels)
+		result
+	))
+
 )
 
 (defn imreduce
