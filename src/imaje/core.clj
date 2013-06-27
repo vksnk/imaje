@@ -73,18 +73,6 @@
 ; 	[fun image]
 ; 	)
 
-(defn pixel-map
-	""
-	[fn pixels]
-	(map fn pixels)
-	)
-
-(defn pixel-reduce
-	""
-	[fn val pixels]
-	(reduce fn val pixels)
-	)
-
 (defn -main
 	[]
 	(println "Starting test application")
