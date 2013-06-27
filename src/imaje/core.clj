@@ -16,7 +16,7 @@
 
 (defn imrender
 	""
-	[fun rwidth rheight]
+	([fun rwidth rheight]
 	(let [result (empty-image rwidth rheight)
 			new-pixels (get-pixels result)
 			]
@@ -26,9 +26,36 @@
 		)
 		(set-pixels! result new-pixels)
 		result
+		)
 	)
-
+	([fun rwidth rheight image]
+	(let [result (empty-image rwidth rheight)
+			new-pixels (get-pixels result)
+			sampler (create-sampler image)
+			]
+		(dotimes [y rheight]
+			(dotimes [x rwidth]
+				(aset ^ints new-pixels (+ x (* rwidth y)) ^int (fun x y sampler)))
+		)
+		(set-pixels! result new-pixels)
+		result
+		)
 	)
+	([fun rwidth rheight image1 image2]
+	(let [result (empty-image rwidth rheight)
+			new-pixels (get-pixels result)
+			sampler1 (create-sampler image1)
+			sampler2 (create-sampler image2)
+			]
+		(dotimes [y rheight]
+			(dotimes [x rwidth]
+				(aset ^ints new-pixels (+ x (* rwidth y)) ^int (fun x y sampler1 sampler2)))
+		)
+		(set-pixels! result new-pixels)
+		result
+		)
+	)
+)
 
 (defn immap
 	""
