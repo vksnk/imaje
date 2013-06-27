@@ -59,10 +59,8 @@
 
 (defn immap
 	""
-	([fun image]
-	(imrender fun (width image) (height image) image))
-	([fun image1 image2]
-	(imrender fun (width image1) (height image1) image1 image2))
+	([fun image] (imrender fun (width image) (height image) image))
+	([fun image1 image2] (imrender fun (width image1) (height image1) image1 image2))
 )
 
 (defn imreduce
