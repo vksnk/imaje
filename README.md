@@ -21,14 +21,14 @@ Also, imaje provides basic wrapper around BufferedImage and ImageIO, so you can:
 Add the following to your Leiningen `:dependencies`:
 
 ```clj
-[imaje "0.1"]
+[imaje "0.1.0"]
 ```
 ## Usage
 
 The top level interface is in `imaje.core`.
 
 ```clj
-    (use 'imaje.core)
+   (use 'imaje.core)
 ```
 
 For example, you can create and fill randomly an 640x480 image using `imrender` function:
