@@ -38,7 +38,6 @@ For example, you can create and fill randomly an 640x480 image using `imrender` 
 ```
 or you can create image negative with `immap`:
 ```clojure
-; add 12 to every pixel of image
 (immap (fn [x y sampler] (- 256 (sampler x y))) img)
 ```
 

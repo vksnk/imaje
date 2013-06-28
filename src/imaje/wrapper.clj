@@ -1,40 +1,34 @@
 (ns imaje.wrapper
 	(import java.io.File)
 	(import java.awt.image.BufferedImage)
-	(import javax.imageio.ImageIO)
-	)
+	(import javax.imageio.ImageIO))
 
 (defn width
 	""
 	[image]
-	(.getWidth image)
-	)
+	(.getWidth image))
 
 (defn height
 	""
 	[image]
-	(.getHeight image)
-	)
+	(.getHeight image))
 
 (defn empty-image
 	""
 	([^BufferedImage image]
 	(empty-image (width image) (height image)))
 	([wd hg]
-	(BufferedImage. wd hg BufferedImage/TYPE_INT_RGB)
-	))
+	(BufferedImage. wd hg BufferedImage/TYPE_INT_RGB)))
 
 (defn load-image
 	""
 	[filename]
-	(ImageIO/read (File. filename))
-	)
+	(ImageIO/read (File. filename)))
 
 (defn save-image
 	""
 	[img filename]
-	(ImageIO/write img "png" (File. filename))
-	)
+	(ImageIO/write img "png" (File. filename)))
 
 (defn get-pixels 
  	""
