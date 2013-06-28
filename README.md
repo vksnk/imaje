@@ -8,7 +8,13 @@ This includes:
 * `imreduce`
 * `imrender`
 
-All of those functions are build around `sampler` concept, which provides a simplified way for accessing pixels of the image.
+All of those functions are build around `sampler`s concept, which provides a simplified way for accessing pixels of the image. In general, this is just a function which gets two argument x and y position of pixel and return the value of that pixel.
+
+Also, imaje provides basic wrapper around BufferedImage and ImageIO, so you can:
+
+* create new images
+* access pixel data
+* load/save
 
 ## Installation
 
