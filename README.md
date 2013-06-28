@@ -31,25 +31,21 @@ The top level interface is in `imaje.core`.
     (use 'imaje.core)
 ```
 
-
-Create new image using provided function:
+For example, you can create and fill randomly an 640x480 image using `imrender` function:
 
 ```clojure
-; just fill image with one single value (12)
-(imrender (fn [_ _] 12) 640 480)
+(imrender (fn [x y] (rand-int 256)) 640 480)
 ```
-
-Apply function to every pixel of image and produce new image:
-
+or you can create image negative with `immap`:
 ```clojure
 ; add 12 to every pixel of image
-(immap #(+ (%3 %1 %2) 12) img) 
+(immap (fn [x y sampler] (- 256 (sampler x y))) img)
 ```
 
-Image histogram using reduce function:
+or build a histogram of image with `imreduce` function:
 
 ```clojure
-(imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img)
+(imreduce (fn [accum x y sampler] (update-in accum [(sampler x y)] inc)) (vec (repeat 256 0)) img)
 ```
 
 ## License
