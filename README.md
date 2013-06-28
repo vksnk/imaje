@@ -2,9 +2,31 @@
 
 A Clojure library designed to do image processing in functional style.
 
+This includes:
+
+* `immap`
+* `imreduce`
+* `imrender`
+
+All of those functions are build around `sampler` concept, which provides a simplified way for accessing pixels of the image.
+
+## Installation
+
+Add the following to your Leiningen `:dependencies`:
+
+```clj
+[imaje "0.1"]
+```
 ## Usage
 
-Create new image with some given function:
+The top level interface is in `imaje.core`.
+
+```clj
+    (use 'imaje.core)
+```
+
+
+Create new image using provided function:
 
 ```clojure
 ; just fill image with one single value (12)

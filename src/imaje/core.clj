@@ -83,11 +83,6 @@
 		)
 	)		
 
-; (defn imscan
-; 	""
-; 	[fun image]
-; 	)
-
 (defn -main
 	[]
 	(println "Starting test application")
@@ -95,6 +90,5 @@
 		(time (immap #(+ (%3 %1 %2) 12) img))
 		(time (imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img))
 		(println (imreduce #(update-in %1 [(%4 %2 %3)] inc) (vec (repeat 256 0)) img))
-		(save-image img "out.png")
 	)
 )
