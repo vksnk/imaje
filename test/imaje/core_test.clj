@@ -11,17 +11,17 @@
 		result)
 	)
 
-(deftest imrender-test
-	(testing "Imrender"
-		(is (= 0 1))))
+; (deftest imrender-test
+; 	(testing "Imrender"
+; 		(is (= 0 1))))
 
-; (deftest immap-test
-; 	(testing "Immap with one image"
-; 		(let [rnd-img (generate-random-image 25 25)
-; 				pixels (get-pixels rnd-img)]
-; 				(is (=
-; 						(imreduce #(update-in %1 [(%4 %2 %3)] inc) rnd-img)
-; 						(reduce #(update-in %1 [%2] inc) pixels))))))
+(deftest immap-test
+	(testing "Immap with one image"
+		(let [rnd-img (generate-random-image 25 25)
+				pixels (get-pixels rnd-img)]
+				(is (=
+						(seq (get-pixels (immap #(inc (%3 %1 %2)) rnd-img)))
+						(map #(inc %1) pixels))))))
 
 (deftest imreduce-test
 	(testing "Imreduce with one image and initial value"
